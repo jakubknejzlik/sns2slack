@@ -1,7 +1,7 @@
 {
   "name": "sns2slack",
   "description": "AWS SNS to slack notifications handler for AWS Lambda",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "MIT",
   "repository": {
     "type": "git",
