@@ -2,7 +2,7 @@ const slack = require("./slack");
 const sns = require("./sns");
 
 module.exports = () => {
-  (event, context, callback) => {
+  return (event, context, callback) => {
     let messages = sns.messagesFromEvent(event);
 
     let promises = messages.map(message => {
