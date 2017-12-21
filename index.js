@@ -1,7 +1,7 @@
 const slack = require("./slack");
 const sns = require("./sns");
 
-exports.handler = () => {
+module.exports = () => {
   (event, context, callback) => {
     let messages = sns.messagesFromEvent(event);
 
