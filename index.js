@@ -1,18 +1,34 @@
 const slack = require("./slack");
 const sns = require("./sns");
 
-module.exports = () => {
+module.exports = options => {
+  options = options || {};
+
+  const transformFn = options.transformFn || transformFn;
+
   return (event, context, callback) => {
     let messages = sns.messagesFromEvent(event);
 
-    let promises = messages.map(message => {
-      return slack.sendMessage(null, message.message, 0);
-    });
+    let promises = messages
+      .map(snsMessage => {
+        return transformFn(snsMessage);
+      })
+      .map(message => {
+        return slack.sendMessage(null, message.subject, message.message, 0);
+      });
 
     Promise.all(promises)
       .then(() => {
         callback(null);
       })
       .catch(callback);
+  };
+};
+
+const transformFn = snsMessage => {
+  return {
+    channel: null,
+    message: snsMessage.subject,
+    attachments: [snsMessage.message]
   };
 };
