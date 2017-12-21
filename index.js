@@ -14,7 +14,7 @@ module.exports = options => {
         return transformFn(snsMessage);
       })
       .map(message => {
-        return slack.sendMessage(null, message.subject, message.message, 0);
+        return slack.sendMessage(null, message.message, message.attachments, 0);
       });
 
     Promise.all(promises)
