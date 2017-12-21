@@ -1,0 +1,23 @@
+{
+  "name": "sns2slack",
+  "description": "AWS SNS to slack notifications handler for AWS Lambda",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakubknejzlik/sns2slack.git"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "kms": "^1.0.0",
+    "request": "^2.83.0"
+  },
+  "scripts": {
+    "patch-release": "npm version patch && npm publish && git push --follow-tags",
+    "test": "mocha test"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.172.0",
+    "mocha": "^4.0.1"
+  }
+}
