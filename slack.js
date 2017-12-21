@@ -65,7 +65,7 @@ const sendMessage = (channel, message, attempt) => {
     postData.attachments = [
       {
         color: "danger",
-        text: messages
+        text: message
       }
     ];
     return request.postAsync({ url: slackURL, json: postData }).catch(err => {
