@@ -4,14 +4,17 @@ const sns = require("./sns");
 module.exports = options => {
   options = options || {};
 
-  const _transformFn = options.transformFn || transformFn;
+  const _mapFn = options.map || mapFn;
 
   return (event, context, callback) => {
     let messages = sns.messagesFromEvent(event);
 
     let promises = messages
       .map(snsMessage => {
-        return _transformFn(snsMessage);
+        return _mapFn(snsMessage);
+      })
+      .filter(message => {
+        return !!message;
       })
       .map(message => {
         return slack.sendMessage(null, message.message, message.attachments, 0);
@@ -25,7 +28,7 @@ module.exports = options => {
   };
 };
 
-const transformFn = snsMessage => {
+const mapFn = snsMessage => {
   return {
     channel: null,
     message: snsMessage.subject,

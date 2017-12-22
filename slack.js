@@ -6,6 +6,7 @@ const SLACK_ENCRYPTED_URL = process.env.SLACK_ENCRYPTED_URL;
 const SLACK_URL = process.env.SLACK_URL;
 const SLACK_CHANNEL = process.env.SLACK_CHANNEL;
 const SLACK_USER_NAME = process.env.SLACK_USER_NAME || "AWS SNS";
+const SLACK_USER_ICON = process.env.SLACK_USER_ICON || ":aws:";
 
 let _slackUrl = SLACK_URL;
 const getSlackURL = () => {
@@ -26,7 +27,7 @@ const sendMessage = (channel, message, attachments, attempt) => {
       channel: channel || SLACK_CHANNEL,
       username: SLACK_USER_NAME,
       text: message,
-      icon_emoji: ":aws:"
+      icon_emoji: SLACK_USER_ICON
     };
 
     postData.attachments = attachments.map(attachment => {
