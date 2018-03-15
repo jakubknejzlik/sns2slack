@@ -1,5 +1,5 @@
-const slack = require("./slack");
-const sns = require("./sns");
+const slack = require('./slack');
+const sns = require('./sns');
 
 module.exports = options => {
   options = options || {};
@@ -17,7 +17,12 @@ module.exports = options => {
         return !!message;
       })
       .map(message => {
-        return slack.sendMessage(null, message.message, message.attachments, 0);
+        return slack.sendMessage(
+          message.channel || null,
+          message.message,
+          message.attachments,
+          0
+        );
       });
 
     Promise.all(promises)
